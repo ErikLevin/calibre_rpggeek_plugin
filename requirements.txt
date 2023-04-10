@@ -1,0 +1,8 @@
+# Project specific
+beautifulsoup4
+
+# Style and linting
+black
+mypy
+pydocstyle
+pylint

@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black",
+    "python.linting.pydocstyleEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.defaultInterpreterPath": ".venv/Scripts/python"
+  },
+}

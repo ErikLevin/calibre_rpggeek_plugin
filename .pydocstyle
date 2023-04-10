@@ -1,0 +1,20 @@
+[pydocstyle]
+ignore = D100, D101, D102, D103, D203, D213, D406, D407, D413
+
+# D100 Missing docstring in public module. Covered by pylint.
+
+# D101 Missing docstring in public class. Covered by pylint.
+
+# D102 Missing docstring in public method. Covered by pylint.
+
+# D103 Missing docstring in public function. Covered by pylint.
+
+# D203 1 blank line required before class docstring. You need to choose between D203 and D211.
+
+# D213 Multi-line docstring summary should start at the second line. You need to choose one between D212 and D213.
+
+# D406 Section name should end with a newline. numpy style. You need to choose between numpy or Google style.
+
+# D407 Missing dashed underline after section. numpy style. You need to choose between numpy or Google style.
+
+# D413 Missing blank line after last section. Adds unnecessary whitespace, none of the conventions use this.
