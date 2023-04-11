@@ -53,10 +53,10 @@ def _test_get_book_url__normal_case():
     assert_eq(
         (
             "rpggeek",
-            "303391",
-            "https://rpggeek.com/rpgitem/303391",
+            "648979",
+            "https://rpggeek.com/rpgitemversion/648979",
         ),
-        rpggeek_source.get_book_url({"rpggeek": "303391"}),
+        rpggeek_source.get_book_url({"rpggeek": "648979"}),
     )
 
 
@@ -66,31 +66,25 @@ def _test_get_book_url__no_id():
 
 def _test_id_from_url():
     _test_id_from_url__normal_url()
-    _test_id_from_url__no_title()
     _test_id_from_url__alt_domain()
     _test_id_from_url__invalid_url()
 
 
 def _test_id_from_url__normal_url():
     assert_eq(
-        ("rpggeek", "303391"),
+        ("rpggeek", "648979"),
         rpggeek_source.id_from_url(
-            "https://rpggeek.com/rpgitem/303391/gamemastery-guide"
+            "https://rpggeek.com/rpgitemversion/648979/pdf-version"
         ),
-    )
-
-
-def _test_id_from_url__no_title():
-    assert_eq(
-        ("rpggeek", "303391"),
-        rpggeek_source.id_from_url("https://rpggeek.com/rpgitem/303391"),
     )
 
 
 def _test_id_from_url__alt_domain():
     assert_eq(
-        ("rpggeek", "303391"),
-        rpggeek_source.id_from_url("https://boardgamegeek.com/rpgitem/303391"),
+        ("rpggeek", "648979"),
+        rpggeek_source.id_from_url(
+            "https://boardgamegeek.com/rpgitemversion/648979/pdf-version"
+        ),
     )
 
 
@@ -98,7 +92,7 @@ def _test_id_from_url__invalid_url():
     assert_eq(
         None,
         rpggeek_source.id_from_url(
-            "https://example.com/rpgitem/303391/gamemastery-guide"
+            "https://example.com/rpgitemversion/648979/pdf-version"
         ),
     )
     assert_eq(

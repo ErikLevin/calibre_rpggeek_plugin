@@ -90,6 +90,7 @@ class RPGGeekSource(Source):
     # - What to use as authors. First designer, all designers, fallback to artists,
     #   fallback to producers, fallback to publishers.
     # - Setting various things as designated tags. rpg, rpgsetting, rpggenre
+    # - Use original published date or specific version published date
     def is_customizable(self):
         """Return whether this plugin has config."""
         return False
@@ -111,7 +112,11 @@ class RPGGeekSource(Source):
         """
         rpggeek_id = identifiers.get(_ID_TYPE, None)
         if rpggeek_id:
-            return (_ID_TYPE, rpggeek_id, "https://rpggeek.com/rpgitem/" + rpggeek_id)
+            return (
+                _ID_TYPE,
+                rpggeek_id,
+                "https://rpggeek.com/rpgitemversion/" + rpggeek_id,
+            )
         return None
 
     def id_from_url(self, url) -> tuple[str, str] | None:
@@ -129,7 +134,7 @@ class RPGGeekSource(Source):
             return None
 
         path_parts: list[str] = parsed_url.path.strip("/").split("/")
-        if len(path_parts) < 2 or path_parts[0] != "rpgitem":
+        if len(path_parts) < 2 or path_parts[0] != "rpgitemversion":
             return None
         return (_ID_TYPE, path_parts[1])
 
@@ -209,6 +214,8 @@ class RPGGeekSource(Source):
         log.debug(soup.prettify())
 
         items = soup.find_all("item", attrs={"type": "rpgitem"})
+        # TODO You can get multiple things from one query
+        # Query for all search results with one API call instead of the below.
         for i, item in enumerate(items):
             self._get_metadata_from_thing_api(
                 item["id"], result_queue, relevance=i, log=log
