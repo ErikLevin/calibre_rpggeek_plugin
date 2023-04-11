@@ -58,6 +58,13 @@ def _get_series(soup: BeautifulSoup) -> tuple[str, int]:
     return series, index
 
 
+def _get_comments(soup: BeautifulSoup) -> str | None:
+    tag = soup.find("description")
+    if not tag or not tag.contents:
+        return None
+    return tag.contents[0]
+
+
 class RPGGeekSource(Source):
     """The plugin class."""
 
@@ -68,9 +75,16 @@ class RPGGeekSource(Source):
     supported_platforms = ["windows", "osx", "linux"]
     capabilities = frozenset(["identify"])
     touched_fields = frozenset(
-        ["title", "authors", "identifier:rpggeek", "pubdate", "publisher", "series"]
+        [
+            "identifier:rpggeek",
+            "title",
+            "authors",
+            "comments",
+            "pubdate",
+            "publisher",
+            "series",
+        ]
     )
-    # TODO Comments - description
 
     # TODO Future work - settings
     # - What to use as authors. First designer, all designers, fallback to artists,
@@ -169,12 +183,14 @@ class RPGGeekSource(Source):
         pub_date = _get_pub_date(soup)
         publisher = _get_publisher(soup)
         series, index = _get_series(soup)
+        comments = _get_comments(soup)
 
         metadata = Metadata(title, authors)
         metadata.set_identifier(_ID_TYPE, rpggeek_id)
         metadata.pubdate = pub_date
         metadata.publisher = publisher
         metadata.series = series
+        metadata.comments = comments
         metadata.series_index = index
         metadata.source = self.name
         metadata.source_relevance = relevance

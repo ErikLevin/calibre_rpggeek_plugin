@@ -9,6 +9,7 @@ from calibre.ebooks.metadata.sources.test import (
     pubdate_test,
     series_test,
     # isbn_test,
+    comments_test,
 )
 from calibre.ebooks.metadata.book.base import Metadata
 from calibre.ebooks.metadata.sources.base import create_log
@@ -207,6 +208,7 @@ if __name__ == "__main__":
                     pubdate_test(2022, 1, 1),
                     publisher_test("Devir"),
                     identifier_test("rpggeek", "363105"),
+                    comments_test("furious flowers and pugilistic plants"),
                 ],
             ),
             (  # RPGGeek ID -> item with non-ASCII title
@@ -252,6 +254,7 @@ if __name__ == "__main__":
                     pubdate_test(2022, 1, 1),
                     publisher_test("Devir"),
                     identifier_test("rpggeek", "363105"),
+                    comments_test("furious flowers and pugilistic plants"),
                 ],
             ),
             (  # Title -> many search results
